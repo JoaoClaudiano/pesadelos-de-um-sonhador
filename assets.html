@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assets - Pesadelos de um Sonhador</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1a0033 0%, #2d0052 100%);
+      color: #fff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff00ff;
+      margin-bottom: 10px;
+      font-size: 48px;
+      text-shadow: 0 0 20px #ff00ff;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #00ffff;
+      margin-bottom: 50px;
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    .section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      color: #ffff00;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #00ffff;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #ff00ff;
+      border-radius: 50%;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .asset-card {
+      background: rgba(50, 50, 100, 0.5);
+      border: 2px solid #00ffff;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .asset-card:hover {
+      border-color: #ff00ff;
+      box-shadow: 0 0 20px #ff00ff;
+      transform: translateY(-5px);
+    }
+
+    .asset-card h3 {
+      color: #ffff00;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .asset-preview {
+      background: rgba(0, 0, 0, 0.5);
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      font-size: 60px;
+    }
+
+    .asset-description {
+      font-size: 12px;
+      color: #cccccc;
+      line-height: 1.4;
+    }
+
+    .sprite-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .sprite-item {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid #666;
+      padding: 10px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .sprite-item canvas {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+    }
+
+    .sprite-item-name {
+      font-size: 11px;
+      color: #aaa;
+      word-break: break-word;
+    }
+
+    .specifications {
+      background: rgba(30, 30, 70, 0.8);
+      border-left: 4px solid #00ffff;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+
+    .specifications h4 {
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+      font-size: 14px;
+    }
+
+    .spec-label {
+      color: #ffff00;
+    }
+
+    .spec-value {
+      color: #00ff00;
+    }
+
+    .color-palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .color-item {
+      padding: 15px;
+      border-radius: 4px;
+      text-align: center;
+      border: 2px solid #333;
+      transition: border-color 0.3s;
+    }
+
+    .color-item:hover {
+      border-color: #fff;
+    }
+
+    .color-name {
+      font-size: 12px;
+      margin-top: 5px;
+      color: #fff;
+    }
+
+    .color-hex {
+      font-size: 10px;
+      color: #aaa;
+      font-family: 'Courier New', monospace;
+    }
+
+    .sound-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      border-left: 4px solid #ff00ff;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sound-info h4 {
+      color: #ffff00;
+      margin-bottom: 5px;
+    }
+
+    .sound-description {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .sound-play-btn {
+      background: #ff00ff;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+
+    .sound-play-btn:hover {
+      background: #ff66ff;
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 30px;
+      padding: 10px 20px;
+      background: #333;
+      color: #00ffff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      background: #555;
+      color: #ff00ff;
+    }
+
+    .tech-specs {
+      background: rgba(0, 20, 40, 0.6);
+      border: 1px solid #0066ff;
+      padding: 20px;
+      margin: 40px 0;
+      border-radius: 8px;
+    }
+
+    .tech-specs h2 {
+      color: #00ffff;
+      margin-bottom: 15px;
+    }
+
+    .tech-specs p {
+      color: #ccc;
+      line-height: 1.6;
+      margin: 10px 0;
+    }
+
+    .code-block {
+      background: #000;
+      border: 1px solid #0f0;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #0f0;
+      overflow-x: auto;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .section-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Voltar ao Jogo</a>
+
+    <h1>🎨 GALERIA DE ASSETS</h1>
+    <p class="subtitle">Pesadelos de um Sonhador - Biblioteca Visual Completa</p>
+
+    <!-- PERSONAGENS -->
+    <div class="section">
+      <div class="section-title">👤 Personagens</div>
+
+      <div class="gallery">
+        <div class="asset-card">
+          <div class="asset-preview">👨‍🦰</div>
+          <h3>Player (Criança)</h3>
+          <p class="asset-description">
+            Sprite do protagonista. Verde claro, humanóide simples. 32x36 pixels.
+            Representa inocência lutando contra pesadelos.
+          </p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">👹</div>
+          <h3>Inimigo Normal</h3>
+          <p class="asset-description">
+            Forma deformada vermelha. 32x32 pixels. Olhos amarelos. Representa traumas
+            menores do subconsciente.
+          </p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">👾</div>
+          <h3>Inimigo Elite</h3>
+          <p class="asset-description">
+            Versão maior e laranja. 32x32 pixels escalado 1.3x. Mais dentes, olhos maiores.
+            Traumas significativos.
+          </p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">🔮</div>
+          <h3>Boss</h3>
+          <p class="asset-description">
+            Forma aterradora magenta/rosa. 48x48 pixels. Olho único grande, aura brilhante.
+            Trauma primário.
+          </p>
+        </div>
+      </div>
+
+      <div class="specifications">
+        <h4>Especificações de Personagens</h4>
+        <div class="spec-item">
+          <span class="spec-label">Dimensão Player:</span>
+          <span class="spec-value">32x36 px</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Dimensão Inimigos (Normal/Elite):</span>
+          <span class="spec-value">32x32 px</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Dimensão Boss:</span>
+          <span class="spec-value">48x48 px (escalado 1.8x)</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Estilo:</span>
+          <span class="spec-value">Pixel Art, cores vibrantes</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Animações:</span>
+          <span class="spec-value">Piscar, shake, glitch effects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJÉTEIS -->
+    <div class="section">
+      <div class="section-title">💫 Projéteis (Pensamentos)</div>
+
+      <div class="sprite-grid">
+        <div class="sprite-item">
+          <div style="background: #ffff00; width: 100%; height: 40px; border-radius: 50%; margin: 0 auto 5px; width: fit-content;"></div>
+          <span class="sprite-item-name">Amarelo</span>
+        </div>
+        <div class="sprite-item">
+          <div style="background: #00ffff; width: 100%; height: 40px; border-radius: 50%; margin: 0 auto 5px; width: fit-content;"></div>
+          <span class="sprite-item-name">Ciano</span>
+        </div>
+        <div class="sprite-item">
+          <div style="background: #ff00ff; width: 100%; height: 40px; border-radius: 50%; margin: 0 auto 5px; width: fit-content;"></div>
+          <span class="sprite-item-name">Magenta</span>
+        </div>
+        <div class="sprite-item">
+          <div style="background: #00ff00; width: 100%; height: 40px; border-radius: 50%; margin: 0 auto 5px; width: fit-content;"></div>
+          <span class="sprite-item-name">Verde</span>
+        </div>
+      </div>
+
+      <div class="specifications">
+        <h4>Especificações de Projéteis</h4>
+        <div class="spec-item">
+          <span class="spec-label">Dimensão:</span>
+          <span class="spec-value">16x16 px</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Forma:</span>
+          <span class="spec-value">Círculo com brilho</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Velocidade Base:</span>
+          <span class="spec-value">400 px/s</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Dano Base:</span>
+          <span class="spec-value">10</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Cores:</span>
+          <span class="spec-value">Aleatória (4 variações)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMULETOS -->
+    <div class="section">
+      <div class="section-title">✨ Amuletos (Power-ups)</div>
+
+      <div class="gallery">
+        <div class="asset-card">
+          <div class="asset-preview">❤️</div>
+          <h3>Saúde</h3>
+          <p class="asset-description">Cor: Vermelho (#ff6666). Restaura 20 de vida. Muito comum.</p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">⚡</div>
+          <h3>Velocidade</h3>
+          <p class="asset-description">Cor: Verde (#66ff66). +30 velocidade. Comum.</p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">💥</div>
+          <h3>Dano</h3>
+          <p class="asset-description">Cor: Laranja (#ff6600). +5 dano aos projéteis. Comum.</p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">🔄</div>
+          <h3>Ricochete</h3>
+          <p class="asset-description">Cor: Ciano (#66ffff). Projéteis ricocheteiam 2x. Raro.</p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">❄️</div>
+          <h3>Slow</h3>
+          <p class="asset-description">Cor: Azul (#6666ff). Inimigos em slow por 2s. Raro.</p>
+        </div>
+
+        <div class="asset-card">
+          <div class="asset-preview">⭐</div>
+          <h3>Stun</h3>
+          <p class="asset-description">Cor: Amarelo (#ffff66). Paralisa inimigos por 1.5s. Raro.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CORES -->
+    <div class="section">
+      <div class="section-title">🎨 Paleta de Cores</div>
+
+      <div class="color-palette">
+        <div class="color-item" style="background: #ff00ff;">
+          <span class="color-name">Magenta Primário</span>
+          <span class="color-hex">#ff00ff</span>
+        </div>
+        <div class="color-item" style="background: #00ffff;">
+          <span class="color-name">Ciano</span>
+          <span class="color-hex">#00ffff</span>
+        </div>
+        <div class="color-item" style="background: #ffff00;">
+          <span class="color-name">Amarelo</span>
+          <span class="color-hex">#ffff00</span>
+        </div>
+        <div class="color-item" style="background: #00ff00;">
+          <span class="color-name">Verde</span>
+          <span class="color-hex">#00ff00</span>
+        </div>
+        <div class="color-item" style="background: #ff0000;">
+          <span class="color-name">Vermelho</span>
+          <span class="color-hex">#ff0000</span>
+        </div>
+        <div class="color-item" style="background: #0066ff;">
+          <span class="color-name">Azul</span>
+          <span class="color-hex">#0066ff</span>
+        </div>
+        <div class="color-item" style="background: #1a0033;">
+          <span class="color-name">Fundo Escuro</span>
+          <span class="color-hex">#1a0033</span>
+        </div>
+        <div class="color-item" style="background: #2d0052;">
+          <span class="color-name">Fundo Médio</span>
+          <span class="color-hex">#2d0052</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONS -->
+    <div class="section">
+      <div class="section-title">🔊 Efeitos Sonoros</div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Disparo</h4>
+          <p class="sound-description">Bip curto e agudo (800Hz → 400Hz, 0.1s)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('shoot')">▶ Tocar</button>
+      </div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Dano</h4>
+          <p class="sound-description">Tom baixo descendente (200Hz → 100Hz, 0.2s)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('damage')">▶ Tocar</button>
+      </div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Coleta de Item</h4>
+          <p class="sound-description">Tom ascendente (400Hz → 1000Hz, 0.2s)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('collect')">▶ Tocar</button>
+      </div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Morte</h4>
+          <p class="sound-description">Descida assustadora (800Hz → 100Hz, 0.5s)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('death')">▶ Tocar</button>
+      </div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Vitória</h4>
+          <p class="sound-description">Acordes ascendentes (Do, Mi, Sol)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('victory')">▶ Tocar</button>
+      </div>
+
+      <div class="sound-item">
+        <div class="sound-info">
+          <h4>Glitch</h4>
+          <p class="sound-description">Ruído branco com filtro (0.1s)</p>
+        </div>
+        <button class="sound-play-btn" onclick="playSound('glitch')">▶ Tocar</button>
+      </div>
+    </div>
+
+    <!-- ESPECIFICAÇÕES TÉCNICAS -->
+    <div class="tech-specs">
+      <h2>📋 Especificações Técnicas</h2>
+
+      <h3>Resolução do Jogo</h3>
+      <p>Largura: 800px | Altura: 600px | Aspecto: 4:3</p>
+
+      <h3>Dimensões dos Assets</h3>
+      <ul style="margin-left: 20px; color: #ccc;">
+        <li>Player: 32x36 pixels</li>
+        <li>Inimigos: 32x32 pixels (escalável)</li>
+        <li>Projéteis: 16x16 pixels</li>
+        <li>Itens: 16x16 pixels</li>
+        <li>Partículas: 8x8 pixels</li>
+      </ul>
+
+      <h3>Sistema de Cores</h3>
+      <p>Cores vibrantes em RGB Hex. Gama dinâmica baseada em lucidez.</p>
+
+      <h3>Efeitos Visuais</h3>
+      <ul style="margin-left: 20px; color: #ccc;">
+        <li>Scanlines (linhas horizontais piscantes)</li>
+        <li>Aberração cromática (RGB shift)</li>
+        <li>Inversão de cores em muito baixa lucidez</li>
+        <li>Screen tear (rasgo visual)</li>
+        <li>Double vision (duplicação de sprite)</li>
+        <li>Pixelização dinâmica</li>
+      </ul>
+
+      <h3>Áudio</h3>
+      <p>Web Audio API para síntese de sons em tempo real. Sem arquivos de áudio externos.</p>
+
+      <h3>Performance</h3>
+      <ul style="margin-left: 20px; color: #ccc;">
+        <li>Phaser 3 com Arcade Physics</li>
+        <li>Graphics renderizados em GPU</li>
+        <li>Pooling de objetos para partículas</li>
+        <li>Target: 60 FPS</li>
+      </ul>
+    </div>
+
+    <footer>
+      <p>Pesadelos de um Sonhador © 2024 | Galeria de Assets v1.0</p>
+      <p style="font-size: 12px; margin-top: 10px;">Acesse o código-fonte em GitHub</p>
+    </footer>
+  </div>
+
+  <script>
+    // Simular toque de sons
+    function playSound(soundType) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+      const generators = {
+        shoot: () => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.frequency.setValueAtTime(800, audioContext.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(audioContext.currentTime);
+          osc.stop(audioContext.currentTime + 0.1);
+        },
+        damage: () => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(150, audioContext.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(80, audioContext.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(audioContext.currentTime);
+          osc.stop(audioContext.currentTime + 0.15);
+        },
+        collect: () => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.frequency.setValueAtTime(400, audioContext.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(audioContext.currentTime);
+          osc.stop(audioContext.currentTime + 0.15);
+        },
+        death: () => {
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.frequency.setValueAtTime(800, audioContext.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.5);
+          gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(audioContext.currentTime);
+          osc.stop(audioContext.currentTime + 0.5);
+        },
+        victory: () => {
+          const notes = [523, 659, 784];
+          const gain = audioContext.createGain();
+          gain.connect(audioContext.destination);
+          notes.forEach((freq, i) => {
+            const osc = audioContext.createOscillator();
+            osc.connect(gain);
+            const time = audioContext.currentTime + (i * 0.2);
+            osc.frequency.setValueAtTime(freq, time);
+            gain.gain.setValueAtTime(0.15, time);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.15);
+            osc.start(time);
+            osc.stop(time + 0.15);
+          });
+        },
+        glitch: () => {
+          const bufferSize = audioContext.sampleRate * 0.1;
+          const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) {
+            data[i] = Math.random() * 2 - 1;
+          }
+          const source = audioContext.createBufferSource();
+          source.buffer = buffer;
+          const gain = audioContext.createGain();
+          source.connect(gain);
+          gain.connect(audioContext.destination);
+          gain.gain.setValueAtTime(0.15, audioContext.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+          source.start(audioContext.currentTime);
+          source.stop(audioContext.currentTime + 0.1);
+        },
+      };
+
+      if (generators[soundType]) {
+        generators[soundType]();
+      }
+    }
+  </script>
+</body>
+</html>
